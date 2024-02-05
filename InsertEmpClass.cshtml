@@ -1,0 +1,107 @@
+﻿@using System.Data.SqlClient;
+@{
+    SqlDataReader rdrloc = ViewBag.rdrloc;
+    SqlDataReader rdrdept = ViewBag.rdrdept;
+    SqlDataReader rdrrept = ViewBag.rdrrept;
+ 
+}
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    .emp {
+        font-weight: bold;
+    }
+</style>
+
+
+
+<body>
+    <form method="post">
+
+
+        <table>
+            <tr>
+                <td class="emp" colspan="7" align="center">
+                    Employee
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Names
+                </th>
+                <th>
+                    Salary
+                </th>
+                <th>
+                    Loc_id
+                </th>
+                <th>
+                    Dept_id
+                </th>
+                <th>
+                    manager
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    <input name="emp_id" type="text"  />
+                </td>
+
+                <td>
+                    <input name="emp_name" type="text"  />
+
+
+                </td>
+
+                <td>
+                    <input name="salary" type="text" />
+                </td>
+
+                <td>
+                    <select id="locn_id" name="locn_id">
+                        @while (rdrloc.Read())
+                        {
+
+                            <option value="@rdrloc["locn_id"]"> @rdrloc["locn_id"]</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select id="dept_id" name="dept_id">
+                        @while (rdrdept.Read())
+                        {
+
+                            <option value="@rdrdept["dept_id"]"> @rdrdept["dept_id"]</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select id="rep_to" name="rep_to">
+                        @while (rdrrept.Read())
+                        {
+
+                            <option value="@rdrrept["emp_id"]"> @rdrrept["emp_id"]</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input name="submit" type="submit" />
+
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+</body>
+

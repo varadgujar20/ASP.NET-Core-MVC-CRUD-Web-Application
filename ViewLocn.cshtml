@@ -1,0 +1,39 @@
+﻿@using System.Data.SqlClient;
+@{
+    SqlDataReader reader = ViewBag.ViewConnect;
+}
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    .emp {
+        font-weight: bold;
+    }
+</style>
+<body>
+    <table border="3">
+        <tr>
+            <th colspan="8">Location View Section</th>
+        </tr>
+        <tr>
+            <th>Location Id</th>
+            <th>Location Name</th>
+            <th colspan="2">Action</th>
+
+        </tr>
+        @while (reader.Read())
+        {
+            <tr>
+                <td>@reader["locn_id"]</td>
+                <td>@reader["locn_desc"]</td>
+            <td><a asp-controller="Update" asp-action="UpdateLocn" asp-route-id="@reader["locn_id"]">Update</a></td>
+                <td><a asp-controller="View" asp-action="LocnDelete" asp-route-locn_id="@reader["locn_id"]">Delete</a></td>
+            </tr>
+        }
+        <tr>
+            <td colspan="4"><h5>Insert Button =====><a asp-controller="Insert" asp-action="InsertLocn">Insert</a></h5></td>
+        </tr>
+    </table>
+</body>

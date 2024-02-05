@@ -1,0 +1,29 @@
+﻿@using System.Data.SqlClient;
+@{
+    SqlDataReader reader = ViewBag.UpdateDept;
+}
+<body>
+    <form method="Post" asp-controller="Update" asp-action="UpdateDept2" >
+        <table>
+            <tr>
+                <th>Update Department Table</th>
+            </tr>
+            <tr>
+                <th>Department ID</th>
+                <th>Department Name</th>
+            </tr>
+            @while(reader.Read())
+            {
+                <tr>
+                    <td>
+                        <input type="text" id="id" name="id" value="@reader["dept_id"]" />
+                        <input type="text" id="name" name="name" />
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td><input type="submit"/></td>
+            </tr>
+        </table>
+    </form>
+</body>

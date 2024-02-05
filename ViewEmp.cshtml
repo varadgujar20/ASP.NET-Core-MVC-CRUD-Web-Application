@@ -1,0 +1,47 @@
+﻿@using System.Data.SqlClient;
+@{
+    SqlDataReader reader = ViewBag.ViewConnect;
+   
+}
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    .emp{
+        font-weight:bold;
+    }
+</style>
+<body>
+    <table border="3">
+        <tr>
+            <th colspan=" 8">Employee View Section</th>
+        </tr>
+        <tr>
+            <th>Employee Id</th>
+            <th>Employee Name</th>
+            <th>Employee Salary</th>
+            <th>Location Id</th>
+            <th>Department Id</th>
+            <th>Reporting To</th>
+            <th colspan="2">Action</th>
+        </tr>
+        @while (reader.Read())
+        {
+            <tr>
+                <td>@reader["emp_id"]</td>
+                <td>@reader["emp_name"]</td>
+                <td>@reader["salary"]</td>
+                <td>@reader["locn_desc"]</td>
+                <td>@reader["dept_desc"]</td>
+                <td>@reader["rep_to"]</td>
+                <td><a asp-controller="Update" asp-action="UpdateEmp" asp-route-emp_id="@reader["emp_id"]" asp-route-emp_name="@reader["emp_name"]" asp-route-dept_id="@reader["dept_id"]" asp-route-salary="@reader["salary"]" asp-route-locn_id="@reader["locn_id"]" asp-route-rep_to="@reader["rep_to"]">Update</a></td>
+                <td><a asp-controller="View" asp-action="Delete" asp-route-emp_id="@reader["emp_id"]">Delete</a></td>
+            </tr>
+        }
+        <tr colspan="8">
+            
+            <th colspan="8"><h5>Insert Button =====><a asp-controller="Insert" asp-action="InsertEmpClass">Insert</a></h5></th>
+        </tr>
+    </table>
+</body>

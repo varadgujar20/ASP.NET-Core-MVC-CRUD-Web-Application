@@ -1,0 +1,87 @@
+﻿@using System.Data.SqlClient;
+@{
+    SqlDataReader reader = ViewBag.Connect;
+    SqlDataReader rdr1 = ViewBag.Connectt;
+    SqlDataReader rdr2 = ViewBag.Connecttt;
+}
+
+<body>
+    <form method="post" >
+
+        <@* form asp-controller="Home" asp-action="Update" method="post"> *@
+            <!-- Add hidden fields to store values that the user doesn't modify -->
+            @*  <input type="hidden" name="emp_id" value="@ViewBag.emp_id" />
+            <input type="hidden" name="locn_id" value="@ViewBag.locn_id" />
+            <input type="hidden" name="dept_id" value="@ViewBag.dept_id" />
+            <input type="hidden" name="salary" value="@ViewBag.salary" />
+            <input type="hidden" name="rep_to" value="@ViewBag.rep_to" /> *@
+
+            <table border="1">
+
+                <tr>
+                    <td colspan="2" align="center">Employee Update</td>
+                </tr>
+
+                <tr>
+                    <th>ID</th>
+                    <td>@ViewBag.emp_id</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td><input type="text" name="emp_name" value="@ViewBag.emp_name"/></td>
+                </tr>
+                <tr>
+                    <th>Salary</th>
+                   <td><input type="text" id="salary" name="salary" value="@ViewBag.salary"/></td>
+                </tr>
+
+                <tr>
+                    <th>Location</th>
+                    <td>
+                        <select id="locn_id" name="locn_id">
+                        @while (reader.Read())
+                        {
+                                    <option value="@reader["locn_id"]">@reader["locn_desc"]</option>
+
+
+                                    <!-- Add other location options here -->
+                        }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Department</th>
+                    <td>
+                        <select id="dept_id" name="dept_id">
+                    @while (rdr1.Read())
+                    {
+                                <option value="@rdr1["dept_id"]">@rdr1["dept_desc"]</option>
+
+                                <!-- Add other department options here -->
+                    }
+                        </select>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <th>Reporting To</th>                    
+                    <td>
+                        <select id="rep_to" name="rep_to">
+                             @while (rdr2.Read())
+                            {
+                            
+                            <option value="@rdr2["emp_id"]">@rdr2["emp_id"]</option>
+                            <!-- Add other reporting options here -->
+                            }
+                        </select>
+                    </td>
+                    
+                </tr>
+            
+            <tr>
+                <td><input name="submit" type="submit" /></td>
+            </tr>
+
+        </table>
+    </form>
+</body>
